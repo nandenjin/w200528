@@ -24,7 +24,12 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js'],
   },
-  plugins: [new HtmlWebpackPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: '@nandenjin/W200528',
+      scriptLoading: 'defer',
+    }),
+  ],
   devServer: {
     port: 3000,
     inline: true,
