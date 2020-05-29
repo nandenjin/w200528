@@ -15,6 +15,9 @@
     "dev": "webpack-dev-server"
   },
   "devDependencies": {
+    "@types/dat.gui": "^0.7.5",
+    "@types/stats.js": "^0.17.0",
+    "@types/three": "^0.103.2",
     "@typescript-eslint/eslint-plugin": "^3.0.2",
     "@typescript-eslint/parser": "^3.0.2",
     "cross-env": "^7.0.2",
@@ -36,5 +39,10 @@
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "dat.gui": "^0.7.7",
+    "stats.js": "^0.17.0",
+    "three": "^0.117.1"
   }
 }
