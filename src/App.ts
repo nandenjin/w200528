@@ -77,6 +77,11 @@ export class App {
     clothGeometry.computeVertexNormals()
   }
 
+  setAspectRatio(aspect: number): void {
+    this.camera.aspect = aspect
+    this.camera.updateProjectionMatrix()
+  }
+
   renderTo(renderer: WebGLRenderer): void {
     renderer.render(this.scene, this.camera)
   }

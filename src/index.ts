@@ -47,6 +47,7 @@ window.addEventListener('DOMContentLoaded', init)
 function updateRendererSize() {
   const { innerWidth: w, innerHeight: h } = window
   renderer.setSize(w, h)
+  app.setAspectRatio(w / h)
 }
 window.addEventListener('resize', updateRendererSize)
 
