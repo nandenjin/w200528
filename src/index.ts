@@ -19,6 +19,10 @@ const app = new App()
 
 gui.add(app, 'cameraSpeed', 0, 3)
 gui.add(app.gravity, 'y').name('gravity')
+gui.add(app.forces[0], 'y').name('force0').step(0.01)
+gui.add(app.forces[1], 'y').name('force1').step(0.01)
+gui.add(app.forces[2], 'y').name('force2').step(0.01)
+gui.add(app.forces[3], 'y').name('force3').step(0.01)
 
 const guiClothMaterial = gui.addFolder('ClothMaterial')
 guiClothMaterial.add(app.clothMaterial, 'wireframe')

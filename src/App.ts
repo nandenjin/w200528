@@ -18,6 +18,8 @@ export class App {
   cloth = new Cloth(1, 1, 10, 10)
   gravity = new Vector3(0, -0.01, 0)
 
+  forces = [new Vector3(), new Vector3(), new Vector3(), new Vector3()]
+
   clothGeometry = new ParametricBufferGeometry(
     (u: number, v: number, target: Vector3) =>
       this.cloth.shapeFunction(u, v, target),
@@ -55,6 +57,13 @@ export class App {
       Math.sin(cycle * Math.PI * 2)
     )
     camera.lookAt(0, 0, 0)
+
+    const u = Math.floor((this.cloth.resolutionH * this.cloth.resolutionW) / 4)
+    const v = Math.floor(this.cloth.resolutionW / 4)
+    cloth.particles[u * 1 - v].addForce(this.forces[0])
+    cloth.particles[u * 1 + v].addForce(this.forces[1])
+    cloth.particles[u * 3 - v].addForce(this.forces[2])
+    cloth.particles[u * 3 + v].addForce(this.forces[3])
 
     for (let i = 0; i < cloth.particles.length; i++) {
       const particle = cloth.particles[i]
