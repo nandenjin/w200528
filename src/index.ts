@@ -18,7 +18,10 @@ const stats = new Stats()
 const app = new App()
 
 gui.add(app, 'cameraSpeed', 0, 3)
-gui.addFolder('ClothMaterial').add(app.clothMaterial, 'wireframe')
+gui.add(app.gravity, 'y').name('gravity')
+
+const guiClothMaterial = gui.addFolder('ClothMaterial')
+guiClothMaterial.add(app.clothMaterial, 'wireframe')
 
 function init() {
   // Add renderer to DOM tree
