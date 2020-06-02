@@ -6,9 +6,11 @@ import {
   Vector3,
   ParametricBufferGeometry,
   Mesh,
-  MeshBasicMaterial,
   DoubleSide,
   BufferAttribute,
+  MeshLambertMaterial,
+  AmbientLight,
+  DirectionalLight,
 } from 'three'
 import { Cloth, satisfyConstraints } from './Cloth'
 
@@ -26,7 +28,7 @@ export class App {
     this.cloth.resolutionW,
     this.cloth.resolutionH
   )
-  clothMaterial = new MeshBasicMaterial({
+  clothMaterial = new MeshLambertMaterial({
     color: 0xffffff,
     side: DoubleSide,
     wireframe: true,
@@ -38,6 +40,12 @@ export class App {
     const { scene, clothGeometry, clothMaterial } = this
     console.log(this.cloth)
 
+    const directionalLight = new DirectionalLight(0x888888)
+    directionalLight.position.set(1.5, 2, 1.5)
+    directionalLight.lookAt(0, 0, 0)
+    scene.add(directionalLight)
+
+    scene.add(new AmbientLight(0x888888))
     scene.add(new GridHelper(1, 10))
 
     const clothMesh = new Mesh(clothGeometry, clothMaterial)
