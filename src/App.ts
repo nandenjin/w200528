@@ -88,12 +88,14 @@ export class App {
     )
     camera.lookAt(0, 0, 0)
 
-    const u = Math.floor((this.cloth.resolutionH * this.cloth.resolutionW) / 4)
-    const v = Math.floor(this.cloth.resolutionW / 4)
-    cloth.particles[u * 1 - v].addForce(this.forces[0])
-    cloth.particles[u * 1 + v].addForce(this.forces[1])
-    cloth.particles[u * 3 - v].addForce(this.forces[2])
-    cloth.particles[u * 3 + v].addForce(this.forces[3])
+    const index = (u: number, v: number) =>
+      Math.floor((this.cloth.resolutionH + 1) * v) *
+        (this.cloth.resolutionW + 1) +
+      Math.floor((this.cloth.resolutionW + 1) * u)
+    cloth.particles[index(1 / 3, 1 / 3)].addForce(this.forces[0])
+    cloth.particles[index(1 / 3, 2 / 3)].addForce(this.forces[1])
+    cloth.particles[index(2 / 3, 1 / 3)].addForce(this.forces[2])
+    cloth.particles[index(2 / 3, 2 / 3)].addForce(this.forces[3])
 
     for (let i = 0; i < cloth.particles.length; i++) {
       const particle = cloth.particles[i]
