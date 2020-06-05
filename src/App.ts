@@ -18,7 +18,8 @@ export class App {
   scene = new Scene()
   camera = new PerspectiveCamera()
   cloth = new Cloth(1, 1, 10, 10)
-  gravity = new Vector3(0, -0.01, 0)
+  gravity = new Vector3(0, -0.2, 0)
+  forceAttenuation = 0.9
 
   forces = [new Vector3(), new Vector3(), new Vector3(), new Vector3()]
 
@@ -33,11 +34,12 @@ export class App {
     side: DoubleSide,
     wireframe: true,
   })
+  clothMesh = new Mesh(this.clothGeometry, this.clothMaterial)
 
   cameraSpeed = 1
 
   constructor() {
-    const { scene, clothGeometry, clothMaterial } = this
+    const { scene, clothMaterial, clothMesh } = this
     console.log(this.cloth)
 
     const directionalLight = new DirectionalLight(0x888888)
@@ -48,9 +50,11 @@ export class App {
     scene.add(new AmbientLight(0x888888))
     scene.add(new GridHelper(1, 10))
 
-    const clothMesh = new Mesh(clothGeometry, clothMaterial)
     clothMesh.position.set(0, 0.1, 0)
     scene.add(clothMesh)
+
+    clothMaterial.depthTest = false
+    clothMesh.renderOrder = 1
   }
 
   tick(t: number): void {
@@ -92,6 +96,17 @@ export class App {
 
     ;(clothGeometry.attributes.position as BufferAttribute).needsUpdate = true
     clothGeometry.computeVertexNormals()
+
+    for (const force of this.forces) {
+      force.multiplyScalar(this.forceAttenuation)
+    }
+  }
+
+  shoot(forces: Vector3[]): void {
+    for (let i = 0; i < forces.length; i++) {
+      this.forces[i] = this.forces[i] || new Vector3()
+      this.forces[i].copy(forces[i])
+    }
   }
 
   setAspectRatio(aspect: number): void {
