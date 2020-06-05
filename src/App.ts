@@ -14,10 +14,20 @@ import {
 } from 'three'
 import { Cloth, satisfyConstraints } from './Cloth'
 
+const CLOTH_WIDTH = 1
+const CLOTH_HEIGHT = 1
+const CLOTH_RESOLUTION_X = 10
+const CLOTH_RESOLUTION_Y = 10
+
 export class App {
   scene = new Scene()
   camera = new PerspectiveCamera()
-  cloth = new Cloth(1, 1, 10, 10)
+  cloth: Cloth = new Cloth(
+    CLOTH_WIDTH,
+    CLOTH_HEIGHT,
+    CLOTH_RESOLUTION_X,
+    CLOTH_RESOLUTION_Y
+  )
   gravity = new Vector3(0, -0.2, 0)
   forceAttenuation = 0.9
 
@@ -40,7 +50,6 @@ export class App {
 
   constructor() {
     const { scene, clothMaterial, clothMesh } = this
-    console.log(this.cloth)
 
     const directionalLight = new DirectionalLight(0x888888)
     directionalLight.position.set(1.5, 2, 1.5)
@@ -55,6 +64,15 @@ export class App {
 
     clothMaterial.depthTest = false
     clothMesh.renderOrder = 1
+  }
+
+  initCloth(): void {
+    this.cloth = new Cloth(
+      CLOTH_WIDTH,
+      CLOTH_HEIGHT,
+      CLOTH_RESOLUTION_X,
+      CLOTH_RESOLUTION_Y
+    )
   }
 
   tick(t: number): void {
