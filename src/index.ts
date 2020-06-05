@@ -31,6 +31,12 @@ gui.add(forces[0], 'y', 0, FORCE_MAX).name('force0')
 gui.add(forces[1], 'y', 0, FORCE_MAX).name('force1')
 gui.add(forces[2], 'y', 0, FORCE_MAX).name('force2')
 gui.add(forces[3], 'y', 0, FORCE_MAX).name('force3')
+
+const guiCloth = gui.addFolder('Cloth')
+guiCloth.add(app.clothMaterial, 'wireframe')
+guiCloth.add(app.clothMaterial, 'depthTest')
+guiCloth.add(app.clothMesh, 'renderOrder')
+
 gui.add(
   {
     shoot() {
@@ -39,12 +45,6 @@ gui.add(
   },
   'shoot'
 )
-
-const guiCloth = gui.addFolder('Cloth')
-guiCloth.add(app.clothMaterial, 'wireframe')
-guiCloth.add(app.clothMaterial, 'depthTest')
-guiCloth.add(app.clothMesh, 'renderOrder')
-
 gui.add(app, 'initCloth')
 
 function init() {
