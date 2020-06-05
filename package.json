@@ -1,6 +1,6 @@
 {
   "name": "@nandenjin/w200528",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "main": "index.js",
   "repository": "git@github.com:nandenjin/w200528.git",
   "author": "Kazumi Inada <hello@nandenjin.com>",
